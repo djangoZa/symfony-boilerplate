@@ -1,0 +1,13 @@
+<VirtualHost *:80>
+    ServerName symfony-boilerplate
+    DocumentRoot /var/www/symfony-boilerplate
+    DirectoryIndex app_dev.php
+    <Directory /var/www/symfony-boilerplate>
+        # enable the .htaccess rewrites
+        AllowOverride All
+        Order allow,deny
+        Allow from All
+    </Directory>
+    ErrorLog /var/log/apache2/symfony-boilerplate.log
+    CustomLog /var/log/apache2/symfony-boilerplate.log combined
+</VirtualHost>
