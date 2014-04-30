@@ -1,0 +1,3 @@
+rogers_data_analytics_tool:
+    resource: "@RogersDataAnalyticsToolBundle/Resources/config/routing.yml"
+    prefix:   /

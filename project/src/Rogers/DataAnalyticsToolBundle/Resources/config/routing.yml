@@ -1,0 +1,3 @@
+rogers_data_analytics_tool_homepage:
+    pattern:  /
+    defaults: { _controller: RogersDataAnalyticsToolBundle:Default:index }

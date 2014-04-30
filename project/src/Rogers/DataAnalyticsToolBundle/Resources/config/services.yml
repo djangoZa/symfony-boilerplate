@@ -1,0 +1,6 @@
+services:
+    user.repository:
+        class: Rogers\DataAnalyticsToolBundle\Classes\User\Repository
+    authentication.service:
+        class: Rogers\DataAnalyticsToolBundle\Classes\Authentication\Service
+        arguments: ["@user.repository"]
