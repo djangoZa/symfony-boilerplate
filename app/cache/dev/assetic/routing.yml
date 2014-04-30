@@ -1,5 +1,0 @@
-_assetic:
-    resource: .
-    type: assetic
-_app:
-    resource: /Users/mikejohnclarke/workspace/symfony-boilderplate_/app/config/routing_dev.yml
