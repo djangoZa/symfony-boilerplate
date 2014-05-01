@@ -4,3 +4,5 @@ services:
     authentication.service:
         class: Rogers\DataAnalyticsToolBundle\Classes\Authentication\Service
         arguments: ["@user.repository"]
+    test.controller.authentication.helper:
+        class: Rogers\DataAnalyticsToolBundle\Classes\Test\Controller\Authentication\Helper

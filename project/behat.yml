@@ -1,0 +1,7 @@
+default:
+    # ...
+    extensions:
+        Behat\Symfony2Extension\Extension: ~
+        Behat\MinkExtension\Extension:
+            goutte:    ~
+            selenium2: ~

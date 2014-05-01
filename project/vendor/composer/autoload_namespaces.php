@@ -6,6 +6,7 @@ $vendorDir = dirname(dirname(__FILE__));
 $baseDir = dirname($vendorDir);
 
 return array(
+    'WebDriver' => array($vendorDir . '/instaclick/php-webdriver/lib'),
     'Twig_Extensions_' => array($vendorDir . '/twig/extensions/lib'),
     'Twig_' => array($vendorDir . '/twig/twig/lib'),
     'Symfony\\Component\\Icu\\' => array($vendorDir . '/symfony/icu'),
@@ -18,6 +19,11 @@ return array(
     'Sensio\\Bundle\\DistributionBundle' => array($vendorDir . '/sensio/distribution-bundle'),
     'Psr\\Log\\' => array($vendorDir . '/psr/log'),
     'Incenteev\\ParameterHandler' => array($vendorDir . '/incenteev/composer-parameter-handler'),
+    'Guzzle\\Stream' => array($vendorDir . '/guzzle/stream'),
+    'Guzzle\\Parser' => array($vendorDir . '/guzzle/parser'),
+    'Guzzle\\Http' => array($vendorDir . '/guzzle/http'),
+    'Guzzle\\Common' => array($vendorDir . '/guzzle/common'),
+    'Goutte' => array($vendorDir . '/fabpot/goutte'),
     'Doctrine\\ORM\\' => array($vendorDir . '/doctrine/orm/lib'),
     'Doctrine\\DBAL\\' => array($vendorDir . '/doctrine/dbal/lib'),
     'Doctrine\\Common\\Lexer\\' => array($vendorDir . '/doctrine/lexer/lib'),
@@ -27,6 +33,12 @@ return array(
     'Doctrine\\Common\\Annotations\\' => array($vendorDir . '/doctrine/annotations/lib'),
     'Doctrine\\Common\\' => array($vendorDir . '/doctrine/common/lib'),
     'Doctrine\\Bundle\\DoctrineBundle' => array($vendorDir . '/doctrine/doctrine-bundle'),
+    'Behat\\Symfony2Extension' => array($vendorDir . '/behat/symfony2-extension/src'),
+    'Behat\\Mink\\Driver' => array($vendorDir . '/behat/mink-browserkit-driver/src', $vendorDir . '/behat/mink-goutte-driver/src', $vendorDir . '/behat/mink-selenium2-driver/src'),
+    'Behat\\MinkExtension' => array($vendorDir . '/behat/mink-extension/src'),
+    'Behat\\Mink' => array($vendorDir . '/behat/mink/src'),
+    'Behat\\Gherkin' => array($vendorDir . '/behat/gherkin/src'),
+    'Behat\\Behat' => array($vendorDir . '/behat/behat/src'),
     'Assetic' => array($vendorDir . '/kriswallsmith/assetic/src'),
     '' => array($baseDir . '/src'),
 );

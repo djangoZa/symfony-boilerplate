@@ -21,7 +21,7 @@ git clone https://github.com/djangoZa/symfony-boilerplate.git
 ###Provision Boilerplate
 ```bash
 cd ~/workspace/symfony-boilerplate
-APPLICATION_ENV='development' vagrant up --provision
+vagrant up --provision
 ```
 
 Documentation
