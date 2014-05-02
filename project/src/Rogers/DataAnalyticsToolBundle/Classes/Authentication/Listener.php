@@ -3,7 +3,7 @@ namespace Rogers\DataAnalyticsToolBundle\Classes\Authentication;
 
 use Symfony\Component\HttpKernel\Event\GetResponseEvent;
 use Symfony\Component\HttpKernel\HttpKernel;
-
+use Symfony\Component\HttpFoundation\RedirectResponse;
 class Listener
 {
     protected $_authenticationService;
@@ -25,6 +25,10 @@ class Listener
     {
         $request = $event->getRequest();
         $isWhiteListedRequest = $this->_authenticationService->isWhiteListedRequest($request);
-        var_dump($isWhiteListedRequest);
+
+        if ($isWhiteListedRequest == false) {
+            $response = new RedirectResponse("/authentication");
+            $event->setResponse($response);
+        }
     }
 }

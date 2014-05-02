@@ -1,6 +1,6 @@
-rogers_data_analytics_tool_default_index:
+rogers_data_analytics_tool_dashboard_index:
     path: /
-    defaults: {_controller: RogersDataAnalyticsToolBundle:Default:index}
+    defaults: {_controller: RogersDataAnalyticsToolBundle:Dashboard:index}
 
 rogers_data_analytics_tool_authentication_check:
     path: /authentication

@@ -91,6 +91,15 @@ class FeatureContext extends MinkContext implements KernelAwareInterface
         $asserter->addressEquals($expectedUrl);
     }
 
+    /**
+     * @Then /^I expect there to be a field named "([^"]*)" of type "([^"]*)"$/
+     */
+    public function iExpectThereToBeAFieldNamedOfType($fieldName, $fieldType)
+    {
+        $session = $this->getSession();
+        $asserter = $this->assertSession($session);
+        $asserter->elementExists('xpath', "//input[@type='$fieldType' and @name='$fieldName']");
+    }
 //
 // Place your definition and hook methods here:
 //

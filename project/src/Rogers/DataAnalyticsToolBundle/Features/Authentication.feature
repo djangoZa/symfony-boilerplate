@@ -11,13 +11,15 @@ Feature: Authentication
 
     Scenario: Can be redirected to login if not authenticated
         Given I am logged out
-        When I browse to "/dashboard"
+        When I browse to "/"
         Then I expect to be redirected to "/authentication"
 
-#    Scenario: Can input authentication details
-#        Given I browsed to "/login"
-#        When I want to supply my authenticated details
-#        Then I expect there to be a way for me to introduce these details
+    Scenario: Can input authentication details
+        Given I am logged out
+        When I browse to "/authentication"
+        Then I expect there to be a field named "username" of type "text"
+        And I expect there to be a field named "password" of type "password"
+        And I expect there to be a field named "remember" of type "checkbox"
 
 #    Scenario: Can initiate authentication process
 #        Given I am on the login page

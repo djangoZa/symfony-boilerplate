@@ -17,21 +17,16 @@ class AuthenticationController extends Controller
 
     public function indexAction()
     {
-        echo 'authentication:index'; die();
-    }
-
-    public function checkAction()
-    {
-        echo 'check'; die();
+        return $this->render('RogersDataAnalyticsToolBundle:Authentication:index.html.php');
     }
 
     public function loginAction()
     {
-        echo 'login'; die();
+        return $this->render('RogersDataAnalyticsToolBundle:Authentication:login.html.php');
     }
 
     public function logoutAction()
     {
-        echo 'logout'; die();
+        return $this->render('RogersDataAnalyticsToolBundle:Authentication:logout.html.php');
     }
 }
