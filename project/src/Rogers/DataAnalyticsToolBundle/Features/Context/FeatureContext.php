@@ -14,15 +14,14 @@ use Behat\Gherkin\Node\PyStringNode,
 //
 // Require 3rd-party libraries here:
 //
-//   require_once 'PHPUnit/Autoload.php';
-//   require_once 'PHPUnit/Framework/Assert/Functions.php';
+//require_once 'PHPUnit/Autoload.php';
+//require_once 'PHPUnit/Framework/Assert/Functions.php';
 //
 
 /**
  * Feature context.
  */
-class FeatureContext extends BehatContext //MinkContext if you want to test web
-                  implements KernelAwareInterface
+class FeatureContext extends MinkContext implements KernelAwareInterface
 {
     private $kernel;
     private $parameters;
@@ -46,6 +45,50 @@ class FeatureContext extends BehatContext //MinkContext if you want to test web
     public function setKernel(KernelInterface $kernel)
     {
         $this->kernel = $kernel;
+    }
+
+    /**
+     * @Given /^the "([^"]*)" database is clean$/
+     */
+    public function theDatabaseIsClean($databaseName)
+    {
+        //throw new PendingException();
+    }
+
+    /**
+     * @Given /^the "([^"]*)" table in the "([^"]*)" database has rows:$/
+     */
+    public function theTableInTheDatabaseHasRows($tableName, $databaseName, TableNode $rows)
+    {
+        //throw new PendingException();
+    }
+
+    /**
+     * @Given /^I am logged out$/
+     */
+    public function iAmLoggedOut()
+    {
+        $driver = $this->getSession()->getDriver();
+        $driver->visit('/authentication/logout');
+    }
+
+    /**
+     * @When /^I browse to "([^"]*)"$/
+     */
+    public function iBrowseTo($url)
+    {
+        $driver = $this->getSession()->getDriver();
+        $driver->visit($url);
+    }
+
+    /**
+     * @Then /^I expect to be redirected to "([^"]*)"$/
+     */
+    public function iExpectToBeRedirectedTo($expectedUrl)
+    {
+        $session = $this->getSession();
+        $asserter = $this->assertSession($session);
+        $asserter->addressEquals($expectedUrl);
     }
 
 //

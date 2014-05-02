@@ -24,6 +24,14 @@ framework:
     fragments:       ~
     http_method_override: true
 
+services:
+    kernel.listener.data_analytics_tool_authentication_listener:
+        class: Rogers\DataAnalyticsToolBundle\Classes\Authentication\Listener
+        arguments:
+            - @authentication.service
+        tags:
+            - { name: kernel.event_listener, event: kernel.request, method: onKernelRequest }
+
 # Twig Configuration
 twig:
     debug:            "%kernel.debug%"
