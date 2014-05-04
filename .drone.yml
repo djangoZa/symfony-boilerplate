@@ -1,4 +1,0 @@
-script:
-    - vagrant ssh
-    - cd /vagrant/project
-    - php bin/behat @RogersDataAnalyticsToolBundle
