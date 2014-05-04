@@ -39,6 +39,11 @@ Feature: Authentication
 #       Then I expect there to be a way for me to specify that I want my authentication persisted
 #        And I expect my authentication details to be persisted if the authentication was successful
 
+#    Scenario: Can be redirected to homepage is already logged in
+#       Given I am logged in
+#       When I browse to "/authentication"
+#       Then I expect to be redirected to "/"
+
 #    Scenario: Can be automatically logged in if authentication details were persisted
 #        Given I was previously authenticated
 #        And I specified that I wanted my authentication to be persisted
