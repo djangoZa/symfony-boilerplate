@@ -13,11 +13,13 @@ class Service
 
     public function __construct(
         \Rogers\DataAnalyticsToolBundle\Classes\User\Repository $userRepository,
-        \Rogers\DataAnalyticsToolBundle\Classes\Authentication\Hash\Service $hashService
+        \Rogers\DataAnalyticsToolBundle\Classes\Authentication\Hash\Service $hashService,
+        \Rogers\DataAnalyticsToolBundle\Classes\Authentication\Session\Service $sessionService
     )
     {
         $this->_userRepository = $userRepository;
         $this->_hashService = $hashService;
+        $this->_sessionService = $sessionService;
     }
 
     public function login(Array $options)
@@ -25,10 +27,34 @@ class Service
         $out = false;
 
         $user = $this->_userRepository->getActiveUserByUsername($options['username']);
-        $hash = $this->_hashService->getHash($options['password'], $user->getPasswordHash());
 
-        if ($hash == $user->getPasswordHash()) {
-            //set the user session
+        if(!empty($user)) {
+            $hash = $this->_hashService->getHash($options['password'], $user->getPasswordHash());
+            if ($hash == $user->getPasswordHash()) {
+                $response = $this->_sessionService->setUserId($user->getId());
+                if ($response == true) {
+                    $out = true;
+                }
+            } else {
+                //set the session flash bang message
+            }
+        }
+        
+        return $out;
+    }
+
+    public function logout()
+    {
+        $this->_sessionService->deleteUserId();
+        return;
+    }
+
+    public function isLoggedIn()
+    {
+        $out = false;
+
+        $userId = $this->_sessionService->getUserId();
+        if (!empty($userId)) {
             $out = true;
         }
 

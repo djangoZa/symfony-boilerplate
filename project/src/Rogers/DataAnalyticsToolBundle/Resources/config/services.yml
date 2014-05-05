@@ -1,24 +1,32 @@
 services:
-    zend.db.ioffice.adapter:
+#Application
+    app.db.ioffice:
         class: Zend\Db\Adapter\Adapter
         arguments:
             options:
-                driver: "Pdo_Mysql"
-                database: "ioffice_test"
-                username: "root"
-                password: "root"
-                hostname: "192.168.0.115"
-                port: "3306"
+                driver: "%ioffice_database_driver%"
+                database: "%ioffice_database_database%"
+                username: "%ioffice_database_username%"
+                password: "%ioffice_database_password%"
+                hostname: "%ioffice_database_hostname%"
+                port: "%ioffice_database_port%"
+    app.session:
+        class: Symfony\Component\HttpFoundation\Session\Session
+
+#User
     user.gateway:
         class: Rogers\DataAnalyticsToolBundle\Classes\User\Gateway
-        arguments: ["@zend.db.ioffice.adapter"]
+        arguments: ["@app.db.ioffice"]
     user.repository:
         class: Rogers\DataAnalyticsToolBundle\Classes\User\Repository
         arguments: ["@user.gateway"]
+
+#Authentication      
     authentication.hash.service:
         class: Rogers\DataAnalyticsToolBundle\Classes\Authentication\Hash\Service
+    authentication.session.service:
+        class: Rogers\DataAnalyticsToolBundle\Classes\Authentication\Session\Service
+        arguments: ["@app.session"]
     authentication.service:
         class: Rogers\DataAnalyticsToolBundle\Classes\Authentication\Service
-        arguments: ["@user.repository", "@authentication.hash.service"]
-    test.controller.authentication.helper:
-        class: Rogers\DataAnalyticsToolBundle\Classes\Test\Controller\Authentication\Helper
+        arguments: ["@user.repository", "@authentication.hash.service", "@authentication.session.service"]

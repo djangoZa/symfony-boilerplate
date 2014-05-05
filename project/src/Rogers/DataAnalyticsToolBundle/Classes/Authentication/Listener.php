@@ -4,6 +4,7 @@ namespace Rogers\DataAnalyticsToolBundle\Classes\Authentication;
 use Symfony\Component\HttpKernel\Event\GetResponseEvent;
 use Symfony\Component\HttpKernel\HttpKernel;
 use Symfony\Component\HttpFoundation\RedirectResponse;
+
 class Listener
 {
     protected $_authenticationService;
@@ -21,14 +22,32 @@ class Listener
         return;
     }
 
-    public function _initSecurityCheck(GetResponseEvent $event)
+    private function _initSecurityCheck(GetResponseEvent $event)
+    {
+        if ($this->_isLoggedIn() == false) {
+            if ($this->_isWhiteListedRequest($event) == false) {
+                $this->_redirectToAuthPage($event);
+            }    
+        }
+        return;
+    }
+
+    private function _isLoggedIn()
+    {
+        return $this->_authenticationService->isLoggedIn();
+    }
+
+    private function _isWhiteListedRequest(GetResponseEvent $event)
     {
         $request = $event->getRequest();
         $isWhiteListedRequest = $this->_authenticationService->isWhiteListedRequest($request);
+        return $isWhiteListedRequest;
+    }
 
-        if ($isWhiteListedRequest == false) {
-            $response = new RedirectResponse("/authentication");
-            $event->setResponse($response);
-        }
+    private function _redirectToAuthPage(GetResponseEvent $event)
+    {
+        $response = new RedirectResponse("/authentication");
+        $event->setResponse($response);
+        return;
     }
 }

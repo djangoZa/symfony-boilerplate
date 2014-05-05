@@ -6,16 +6,6 @@ use Symfony\Component\HttpFoundation\Request;
 
 class AuthenticationController extends Controller
 {
-    /*public function indexAction()
-    {
-        $authenticationService = $this->container->get('authentication.service');
-        $user = $authenticationService->getUser();
-
-        return $this->render('RogersDataAnalyticsToolBundle:Authentication:index.html.php', array(
-            'user' => $user
-        ));
-    }*/
-
     public function indexAction()
     {
         return $this->render('RogersDataAnalyticsToolBundle:Authentication:index.html.php');
@@ -23,20 +13,27 @@ class AuthenticationController extends Controller
 
     public function loginAction(Request $request)
     {
+        $response = null;
         $authenticationService = $this->container->get('authentication.service');
-
-        $response = $authenticationService->login(array(
+        $isLoggedIn = $authenticationService->login(array(
             'username' => $request->get('username'), 
             'password' => $request->get('password')
         ));
 
-        var_dump($response); die();
+        if ($isLoggedIn == true) {
+            $response = $this->redirect($this->generateUrl('rogers_data_analytics_tool_dashboard_index'), 301);
+        } else {
+            $response = $this->redirect($this->generateUrl('rogers_data_analytics_tool_authentication_index'), 301);
+        }
 
-        return $this->render('RogersDataAnalyticsToolBundle:Authentication:login.html.php');
+        return $response;
     }
 
     public function logoutAction()
     {
-        return $this->render('RogersDataAnalyticsToolBundle:Authentication:logout.html.php');
+        $authenticationService = $this->container->get('authentication.service');
+        $authenticationService->logout();
+        $response = $this->redirect($this->generateUrl('rogers_data_analytics_tool_dashboard_index'), 301);
+        return $response;
     }
 }

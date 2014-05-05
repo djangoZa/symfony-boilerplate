@@ -6,8 +6,8 @@ Feature: Authentication
     Background:
         Given the "ioffice" database is clean
         And the "users" table in the "ioffice" database has rows:
-            | username | password                           | firstname     | lastname     |
-            | test1    | $1$TLe.gahh$JCbO/Y/eg28FqdA7lFi0m. | testFirstName | testLastName |
+            | accountID | username | passwordHash                                                 |
+            | 1         | test1    | $2a$08$g11xPFJdehbL/9qxTprdeuYpWZtNnUvvTk5YIaRavoI3TFEKQSSUe |
 
     Scenario: Can be redirected to login if not authenticated
         Given I am logged out
@@ -22,13 +22,12 @@ Feature: Authentication
         And I expect there to be a field named "remember" of type "checkbox"
         And I expect there to be a field named "login" of type "submit"
 
-    Scenario: Can login
+    Scenario: Can login with ioffice authentication details
         Given I am logged out
         And I browse to "/authentication"
         When I insert "test1" into the field named "username"
         And I insert "Supersalon1!" into the field named "password"
         And I click the field named "login"
-        Then I expect to be redirected to "/authentication/login"
         And I expect to be redirected to "/"
 
 #    Scenario: Can be alerted when authentication details are invalid
@@ -54,11 +53,6 @@ Feature: Authentication
 #        And I specified that I wanted my authentication to be persisted
 #        When I browse to any page
 #        Then I expect to be granted access automatically
-
-#    Scenario: Can use same authentication details as iOffice
-#        Given I am on the login page
-#        When I want to supply my authenticated details
-#        Then I expect that I am able to use the same authentication details that I use on iOffice
 
 #    Scenario: Can be redirected if authentication is successful
 #        Given I have introduced my authentication details
