@@ -1,7 +1,7 @@
 Feature: Authentication
     In order view the performance of my salons
     As a Salon Manager
-    I need to login to the "Data Analytics Tool" website
+    I need to login to the website
 
     Background:
         Given the "ioffice" database is clean
@@ -14,7 +14,7 @@ Feature: Authentication
         When I browse to "/"
         Then I expect to be redirected to "/authentication"
 
-    Scenario: Can input authentication details
+    Scenario: Can be presented with necessary fields
         Given I am logged out
         When I browse to "/authentication"
         Then I expect there to be a field named "username" of type "text"
