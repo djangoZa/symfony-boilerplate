@@ -82,6 +82,25 @@ class FeatureContext extends MinkContext implements KernelAwareInterface
     }
 
     /**
+     * @When /^I insert "([^"]*)" into the field named "([^"]*)"$/
+     */
+    public function iInsertIntoTheFieldNamed($fieldValue, $fieldName)
+    {
+        $driver = $this->getSession()->getDriver();
+        $element = array_pop($driver->find("//input[@name='$fieldName']"));
+        $element->setValue($fieldValue);
+    }
+
+    /**
+     * @When /^I click the field named "([^"]*)"$/
+     */
+    public function iClickTheFieldNamed($fieldName)
+    {
+        $driver = $this->getSession()->getDriver();
+        $driver->click("//input[@name='$fieldName']");
+    }
+
+    /**
      * @Then /^I expect to be redirected to "([^"]*)"$/
      */
     public function iExpectToBeRedirectedTo($expectedUrl)

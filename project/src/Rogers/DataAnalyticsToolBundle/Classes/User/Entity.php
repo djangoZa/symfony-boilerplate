@@ -3,8 +3,15 @@ namespace Rogers\DataAnalyticsToolBundle\Classes\User;
 
 class Entity
 {
-    public function getName()
+    private $_passwordHash;
+
+    public function __construct(Array $options)
     {
-        return 'Mike Clarke';
+        $this->_passwordHash = $options['passwordHash'];
+    }
+
+    public function getPasswordHash()
+    {
+        return $this->_passwordHash;
     }
 }

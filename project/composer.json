@@ -22,7 +22,8 @@
         "behat/symfony2-extension": "*",
         "behat/mink-extension": "*",
         "behat/mink-goutte-driver": "1.0.*",
-        "behat/mink-selenium2-driver": "*"
+        "behat/mink-selenium2-driver": "*",
+        "zendframework/zend-db": ">=2.0.0"
     },
     "scripts": {
         "post-install-cmd": [

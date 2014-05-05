@@ -9,7 +9,9 @@ rogers_data_analytics_tool_authentication_check:
 rogers_data_analytics_tool_authentication_login:
     path: /authentication/login
     defaults: {_controller: RogersDataAnalyticsToolBundle:Authentication:login}
+    methods: [POST]
 
 rogers_data_analytics_tool_authentication_logout:
     path: /authentication/logout
     defaults: {_controller: RogersDataAnalyticsToolBundle:Authentication:logout}
+    methods: [POST]

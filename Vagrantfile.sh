@@ -5,7 +5,7 @@ apt-get update
 apt-get dist-upgrade
 
 #INSTALL SERVICES
-apt-get install -y apache2 php5 php-pear php5-curl
+apt-get install -y apache2 php5 php-pear php5-curl php5-mysql
 
 #LINK VAGRANT WWW TO APACHE WWW
 ln -fs /vagrant/project/web /var/www/symfony-boilerplate

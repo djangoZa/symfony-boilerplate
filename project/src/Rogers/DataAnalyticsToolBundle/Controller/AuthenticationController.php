@@ -2,6 +2,7 @@
 namespace Rogers\DataAnalyticsToolBundle\Controller;
 use Symfony\Bundle\FrameworkBundle\Controller\Controller;
 use Symfony\Component\DependencyInjection\ContainerAware;
+use Symfony\Component\HttpFoundation\Request;
 
 class AuthenticationController extends Controller
 {
@@ -20,8 +21,17 @@ class AuthenticationController extends Controller
         return $this->render('RogersDataAnalyticsToolBundle:Authentication:index.html.php');
     }
 
-    public function loginAction()
+    public function loginAction(Request $request)
     {
+        $authenticationService = $this->container->get('authentication.service');
+
+        $response = $authenticationService->login(array(
+            'username' => $request->get('username'), 
+            'password' => $request->get('password')
+        ));
+
+        var_dump($response); die();
+
         return $this->render('RogersDataAnalyticsToolBundle:Authentication:login.html.php');
     }
 

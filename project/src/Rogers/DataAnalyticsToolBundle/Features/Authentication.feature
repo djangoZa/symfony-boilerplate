@@ -20,11 +20,16 @@ Feature: Authentication
         Then I expect there to be a field named "username" of type "text"
         And I expect there to be a field named "password" of type "password"
         And I expect there to be a field named "remember" of type "checkbox"
+        And I expect there to be a field named "login" of type "submit"
 
-#    Scenario: Can initiate authentication process
-#        Given I am on the login page
-#        When I have introduced my authentication details
-#        Then I expect there to be a way for me to initiate the authentication process
+    Scenario: Can login
+        Given I am logged out
+        And I browse to "/authentication"
+        When I insert "test1" into the field named "username"
+        And I insert "Supersalon1!" into the field named "password"
+        And I click the field named "login"
+        Then I expect to be redirected to "/authentication/login"
+        And I expect to be redirected to "/"
 
 #    Scenario: Can be alerted when authentication details are invalid
 #        Given I have initiated the authentication process

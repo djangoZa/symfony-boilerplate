@@ -18,7 +18,8 @@ require_once __DIR__.'/../app/AppKernel.php';
 //require_once __DIR__.'/../app/AppCache.php';
 
 $environment = ($_SERVER['HTTP_HOST'] == 'localhost') ? 'test' : array_shift(explode(".",$_SERVER['HTTP_HOST']));
-$kernel = new AppKernel($environment, false);
+$errorReporting = (in_array($environment, array('dev', 'test'))) ? true : false;
+$kernel = new AppKernel($environment, $errorReporting);
 $kernel->loadClassCache();
 //$kernel = new AppCache($kernel);
 
