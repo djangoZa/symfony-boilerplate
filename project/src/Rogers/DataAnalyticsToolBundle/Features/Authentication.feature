@@ -14,7 +14,7 @@ Feature: Authentication
         When I browse to "/"
         Then I expect to be redirected to "/authentication"
 
-    Scenario: Can be presented with necessary fields
+    Scenario: Can be presented with the necessary authentication fields
         Given I am logged out
         When I browse to "/authentication"
         Then I expect there to be a field named "username" of type "text"
