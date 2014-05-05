@@ -1,0 +1,5 @@
+imports:
+    - { resource: parameters.yml }
+
+parameters:
+    ioffice_database_database: "ioffice_test"
