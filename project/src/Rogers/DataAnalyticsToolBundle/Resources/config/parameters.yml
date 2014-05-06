@@ -2,5 +2,5 @@ parameters:
     ioffice_database_driver: "Pdo_Mysql"
     ioffice_database_username: "root"
     ioffice_database_password: "root"
-    ioffice_database_hostname: "192.168.0.115"
+    ioffice_database_hostname: "10.0.1.115"
     ioffice_database_port: "3306"

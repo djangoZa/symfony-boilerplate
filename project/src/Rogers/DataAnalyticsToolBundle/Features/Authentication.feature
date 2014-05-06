@@ -28,34 +28,57 @@ Feature: Authentication
         When I insert "test1" into the field named "username"
         And I insert "Supersalon1!" into the field named "password"
         And I click the field named "login"
-        And I expect to be redirected to "/"
+        Then I expect to be redirected to "/"
 
-#    Scenario: Can be alerted when authentication details are invalid
-#        Given I have initiated the authentication process
-#        When my authentication details have been processed
-#        And my authentication details are incorrect
-#        Then I expect to see a message alerting me of this
-#        And I expect to be able to re introduce my authentication details
+    Scenario: Can be alerted when incorrect authentication details are supplied
+        Given I am logged out
+        And I browse to "/authentication"
+        When I insert "test1" into the field named "username"
+        And I insert "wrongPassword" into the field named "password"
+        And I click the field named "login"
+        Then I expect to be redirected to "/authentication"
+        And I expect to see an alert message that says "Invalid authentication details have been supplied"
 
-#    Scenario: Can specify that authentication details are persisted
-#        Given I am on the login page
-#        When I have introduced my authentication details
-#       Then I expect there to be a way for me to specify that I want my authentication persisted
-#        And I expect my authentication details to be persisted if the authentication was successful
+    Scenario: Can persist the values previously inserted into the fields
+        Given I am logged out
+        And I browse to "/authentication"
+        When I insert "test1" into the field named "username"
+        And I insert "wrongPassword" into the field named "password"
+        And I check the "remember" field
+        And I click the field named "login"
+        Then I expect to be redirected to "/authentication"
+        And I expect the "username" field has a value of "test1"
+        And I expect the "password" field has a value of "wrongPassword"
+        And I expect the "remember" field to be checked
 
-#    Scenario: Can be redirected to homepage is already logged in
-#       Given I am logged in
-#       When I browse to "/authentication"
-#       Then I expect to be redirected to "/"
+    Scenario: Can remember a successful login
+        Given I am logged out
+        And I browse to "/authentication"
+        And I insert "test1" into the field named "username"
+        And I insert "Supersalon1!" into the field named "password"
+        And I check the "remember" field
+        And I click the field named "login"
+        When I reset my browser session
+        And I browse to "/"
+        Then I expect to be on "/"
+        And I expect there to be a cookie named "userId" of value "2"
 
-#    Scenario: Can be automatically logged in if authentication details were persisted
-#        Given I was previously authenticated
-#        And I specified that I wanted my authentication to be persisted
-#        When I browse to any page
-#        Then I expect to be granted access automatically
+    Scenario: Can be redirected to authentication if login was not remembered and the browser is reset
+        Given I am logged out
+        And I browse to "/authentication"
+        And I insert "test1" into the field named "username"
+        And I insert "Supersalon1!" into the field named "password"
+        And I click the field named "login"
+        When I reset my browser session
+        And I browse to "/"
+        Then I expect to be redirected to "/authentication"
 
-#    Scenario: Can be redirected if authentication is successful
-#        Given I have introduced my authentication details
-#        And I have initiated the authentication process
-#        When my authentication details have been processed successfully
-#        Then I expect to be redirected to the main dashboard"
+    Scenario: Can delete the user cookie when logging out
+        Given I am logged out
+        And I browse to "/authentication"
+        And I insert "test1" into the field named "username"
+        And I insert "Supersalon1!" into the field named "password"
+        And I check the "remember" field
+        And I click the field named "login"
+        When I log out
+        Then I expect that there is not a cookie named "userId"

@@ -3,27 +3,35 @@ namespace Rogers\DataAnalyticsToolBundle\Controller;
 use Symfony\Bundle\FrameworkBundle\Controller\Controller;
 use Symfony\Component\DependencyInjection\ContainerAware;
 use Symfony\Component\HttpFoundation\Request;
+use Symfony\Component\HttpFoundation\Cookie;
 
 class AuthenticationController extends Controller
 {
     public function indexAction()
     {
-        return $this->render('RogersDataAnalyticsToolBundle:Authentication:index.html.php');
+        $authenticationService = $this->container->get('authentication.session.service');
+        return $this->render('RogersDataAnalyticsToolBundle:Authentication:index.html.php', array(
+            'alert' => $authenticationService->getFlashMessage('alert'),
+            'username' => $authenticationService->getFlashMessage('username'),
+            'password' => $authenticationService->getFlashMessage('password'),
+            'remember' => $authenticationService->getFlashMessage('remember')
+        ));
     }
 
     public function loginAction(Request $request)
     {
-        $response = null;
         $authenticationService = $this->container->get('authentication.service');
-        $isLoggedIn = $authenticationService->login(array(
+        $authenticationResponse = $authenticationService->login(array(
             'username' => $request->get('username'), 
-            'password' => $request->get('password')
+            'password' => $request->get('password'),
+            'remember' => $request->get('remember')
         ));
 
-        if ($isLoggedIn == true) {
-            $response = $this->redirect($this->generateUrl('rogers_data_analytics_tool_dashboard_index'), 301);
+        if ($authenticationResponse->isSuccessful() == true) {
+            $response = $this->redirect('/', 301);
+            $response = $authenticationService->setCookie($response, $request);
         } else {
-            $response = $this->redirect($this->generateUrl('rogers_data_analytics_tool_authentication_index'), 301);
+            $response = $this->redirect('/authentication', 301);
         }
 
         return $response;
@@ -33,7 +41,10 @@ class AuthenticationController extends Controller
     {
         $authenticationService = $this->container->get('authentication.service');
         $authenticationService->logout();
-        $response = $this->redirect($this->generateUrl('rogers_data_analytics_tool_dashboard_index'), 301);
+
+        $response = $this->redirect('/', 301);
+        $response = $authenticationService->deleteCookie($response);
+
         return $response;
     }
 }

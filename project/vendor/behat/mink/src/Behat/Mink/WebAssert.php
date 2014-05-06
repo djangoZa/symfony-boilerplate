@@ -125,6 +125,21 @@ class WebAssert
     }
 
     /**
+     * Checks that specified cookie does not exist
+     *
+     * @param string $name cookie name
+     *
+     * @throws Behat\Mink\Exception\ExpectationException
+     */
+    public function cookieNotExists($name)
+    {
+        if ($this->session->getCookie($name) !== null) {
+            $message = sprintf('Cookie "%s" is set, but should not be.', $name);
+            throw new ExpectationException($message, $this->session);
+        }
+    }
+
+    /**
      * Checks that current response code equals to provided one.
      *
      * @param integer $code
@@ -500,7 +515,7 @@ class WebAssert
      */
     public function fieldValueEquals($field, $value, Element $container = null)
     {
-        $node   = $this->fieldExists($field, $container);
+        $node   = ($container instanceof \Behat\Mink\Element\NodeElement) ? $container : $this->fieldExists($field, $container);
         $actual = $node->getValue();
         $regex  = '/^'.preg_quote($value, '/').'/ui';
 
@@ -541,7 +556,7 @@ class WebAssert
      */
     public function checkboxChecked($field, Element $container = null)
     {
-        $node = $this->fieldExists($field, $container);
+        $node = ($container instanceof \Behat\Mink\Element\NodeElement) ? $container : $this->fieldExists($field, $container);
 
         if (!$node->isChecked()) {
             $message = sprintf('Checkbox "%s" is not checked, but it should be.', $field);

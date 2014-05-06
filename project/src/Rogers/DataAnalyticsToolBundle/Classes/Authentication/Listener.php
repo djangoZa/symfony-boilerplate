@@ -24,7 +24,7 @@ class Listener
 
     private function _initSecurityCheck(GetResponseEvent $event)
     {
-        if ($this->_isLoggedIn() == false) {
+        if ($this->_isLoggedIn($event) == false) {
             if ($this->_isWhiteListedRequest($event) == false) {
                 $this->_redirectToAuthPage($event);
             }    
@@ -32,9 +32,10 @@ class Listener
         return;
     }
 
-    private function _isLoggedIn()
+    private function _isLoggedIn($event)
     {
-        return $this->_authenticationService->isLoggedIn();
+        $request = $event->getRequest();
+        return $this->_authenticationService->isLoggedIn($request);
     }
 
     private function _isWhiteListedRequest(GetResponseEvent $event)

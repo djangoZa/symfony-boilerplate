@@ -21,7 +21,9 @@ services:
         class: Rogers\DataAnalyticsToolBundle\Classes\User\Repository
         arguments: ["@user.gateway"]
 
-#Authentication      
+#Authentication
+    authentication.response.repository:
+        class: Rogers\DataAnalyticsToolBundle\Classes\Authentication\Response\Repository
     authentication.hash.service:
         class: Rogers\DataAnalyticsToolBundle\Classes\Authentication\Hash\Service
     authentication.session.service:
@@ -29,4 +31,4 @@ services:
         arguments: ["@app.session"]
     authentication.service:
         class: Rogers\DataAnalyticsToolBundle\Classes\Authentication\Service
-        arguments: ["@user.repository", "@authentication.hash.service", "@authentication.session.service"]
+        arguments: ["@user.repository", "@authentication.response.repository", "@authentication.hash.service", "@authentication.session.service"]

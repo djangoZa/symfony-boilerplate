@@ -18,8 +18,8 @@ cp /vagrant/VirtualHost /etc/apache2/sites-available/symfony-boilerplate
 a2ensite symfony-boilerplate
 
 #INSTALL PHPUNIT
-pear config-set auto_discover 1
-pear install pear.phpunit.de/PHPUnit
+#pear config-set auto_discover 1
+#pear install pear.phpunit.de/PHPUnit
 
 #RESTART APACHE
 service apache2 restart
