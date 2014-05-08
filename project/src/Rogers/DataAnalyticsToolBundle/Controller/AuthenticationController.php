@@ -29,7 +29,7 @@ class AuthenticationController extends Controller
 
         if ($authenticationResponse->isSuccessful() == true) {
             $response = $this->redirect('/', 301);
-            $response = $authenticationService->setCookie($response, $request);
+            $response = $authenticationService->setUserCookie($response, $request);
         } else {
             $response = $this->redirect('/authentication', 301);
         }

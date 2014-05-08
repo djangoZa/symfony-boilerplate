@@ -30,7 +30,7 @@ class Service
         //Set the default response
         $out = $this->_responseRepository->makeResponse(array(
             'successful' => false,
-            'message' => 'Invalid authentication details have been supplied'
+            'message' => 'Those authentication details are incorrect'
         ));
 
         //Try and log the user in
@@ -63,13 +63,13 @@ class Service
         return;
     }
 
-    public function setCookie(
+    public function setUserCookie(
         \Symfony\Component\HttpFoundation\RedirectResponse $response,
         \Symfony\Component\HttpFoundation\Request $request
     )
     {
         $userId = $this->_sessionService->getUserId();
-        $response = $this->_sessionService->setCookie($response, $request, $userId);
+        $response = $this->_sessionService->setUserCookie($response, $request, $userId);
         return $response;
     }
 
@@ -87,15 +87,23 @@ class Service
         if (!empty($sessionUserId)) {
             $out = true;
         } else {
-            //check the cookie
-            $cookieUserId = $this->_sessionService->getUserIdFromCookie($request);
-            if (!empty($cookieUserId)) {
-                //set the user id from the cookie into the user id in the session
-                $response = $this->_sessionService->setUserId($cookieUserId);
-                if ($response == true) {
+
+            //check to see if we have user authentication details in a cookie
+            $authenticationDetails = $this->_sessionService->getAuthenticationDetailsFromCookie($request);
+            if (!empty($authenticationDetails)) {
+
+                //try and log the user in using the cookie details
+                $response = $this->login(array(
+                    'username' => $authenticationDetails['username'],
+                    'password' => $authenticationDetails['password']
+                ));
+
+                //set the return value
+                if ($response->isSuccessful() == true) {
                     $out = true;
                 }
             }
+
         }
 
         return $out;

@@ -8,7 +8,7 @@ class Entity
 
     public function __construct(Array $options)
     {
-        $this->_id = $options['accountID'];
+        $this->_id = $options['userID'];
         $this->_passwordHash = $options['passwordHash'];
     }
 

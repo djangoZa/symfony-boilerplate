@@ -1,0 +1,17 @@
+.login {
+    background-image: url(/images/background.jpg);
+}
+
+.login .logo {
+    margin: 0 auto;
+    margin-top: 60px;
+    padding: 15px 0;
+    text-align: center;
+}
+
+.login .panel {
+    padding: 25px;
+    background-color: #FFF;
+    width:360px;
+    margin: 0 auto;
+}

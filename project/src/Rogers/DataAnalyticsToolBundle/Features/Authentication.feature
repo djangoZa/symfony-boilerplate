@@ -1,13 +1,13 @@
 Feature: Authentication
-    In order view the performance of my salons
+    In order to view the performance of my salons
     As a Salon Manager
     I need to login to the website
 
     Background:
         Given the "ioffice" database is clean
         And the "users" table in the "ioffice" database has rows:
-            | accountID | username | passwordHash                                                 |
-            | 1         | test1    | $2a$08$g11xPFJdehbL/9qxTprdeuYpWZtNnUvvTk5YIaRavoI3TFEKQSSUe |
+            | userID    | username | passwordHash                                                 | status |
+            | 1         | test1    | $2a$08$g11xPFJdehbL/9qxTprdeuYpWZtNnUvvTk5YIaRavoI3TFEKQSSUe | 1      |
 
     Scenario: Can be redirected to login if not authenticated
         Given I am logged out
@@ -37,7 +37,7 @@ Feature: Authentication
         And I insert "wrongPassword" into the field named "password"
         And I click the field named "login"
         Then I expect to be redirected to "/authentication"
-        And I expect to see an alert message that says "Invalid authentication details have been supplied"
+        And I expect to see an alert message that says "Those authentication details are incorrect"
 
     Scenario: Can persist the values previously inserted into the fields
         Given I am logged out
@@ -61,7 +61,7 @@ Feature: Authentication
         When I reset my browser session
         And I browse to "/"
         Then I expect to be on "/"
-        And I expect there to be a cookie named "userId" of value "2"
+        And I expect there to be a cookie named "userAuthentication" of value "eyJ1c2VybmFtZSI6InRlc3QxIiwicGFzc3dvcmQiOiJTdXBlcnNhbG9uMSEifQ=="
 
     Scenario: Can be redirected to authentication if login was not remembered and the browser is reset
         Given I am logged out
@@ -81,4 +81,4 @@ Feature: Authentication
         And I check the "remember" field
         And I click the field named "login"
         When I log out
-        Then I expect that there is not a cookie named "userId"
+        Then I expect that there is not a cookie named "userAuthentication"

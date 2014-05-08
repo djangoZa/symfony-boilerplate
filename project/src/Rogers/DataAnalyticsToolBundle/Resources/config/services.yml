@@ -32,3 +32,24 @@ services:
     authentication.service:
         class: Rogers\DataAnalyticsToolBundle\Classes\Authentication\Service
         arguments: ["@user.repository", "@authentication.response.repository", "@authentication.hash.service", "@authentication.session.service"]
+
+#Locale
+    locale.gateway:
+        class: Rogers\DataAnalyticsToolBundle\Classes\Locale\Gateway
+    locale.repository:
+        class: Rogers\DataAnalyticsToolBundle\Classes\Locale\Repository
+        arguments: ["@locale.gateway"]
+    locale.service:
+        class: Rogers\DataAnalyticsToolBundle\Classes\Locale\Service
+        arguments: ["@locale.repository"]
+
+#Test
+    test.database.gateway.ioffice:
+        class: Rogers\DataAnalyticsToolBundle\Classes\Test\Database\Gateway\Ioffice
+        arguments: ["@app.db.ioffice"]
+    test.database.repository:
+        class: Rogers\DataAnalyticsToolBundle\Classes\Test\Database\Repository
+        arguments: ["@test.database.gateway.ioffice"]
+    test.database.service:
+        class: Rogers\DataAnalyticsToolBundle\Classes\Test\Database\Service
+        arguments: ["@test.database.repository"]
