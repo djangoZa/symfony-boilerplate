@@ -14,7 +14,9 @@ class FeatureContext extends BehatContext
      */
     public function __construct(array $parameters)
     {
-        $this->useContext('myMinkContext', new MyMinkContext($parameters));
-        $this->useContext('myBehatContext', new MyBehatContext($parameters));
+        $this->useContext('WebUtilityContext', new WebUtilityContext($parameters));
+        $this->useContext('ResourceUtilityContext', new ResourceUtilityContext($parameters));
+        $this->useContext('AuthenticationContext', new AuthenticationContext($parameters));
+        $this->useContext('HierarchyContext', new HierarchyContext($parameters));
     }
 }

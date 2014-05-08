@@ -11,7 +11,7 @@ use Behat\Gherkin\Node\TableNode;
 /**
  * Feature context.
  */
-class MyBehatContext extends BehatContext implements KernelAwareInterface
+class HierarchyContext extends BehatContext implements KernelAwareInterface
 {
     private $kernel;
     private $parameters;
@@ -35,26 +35,5 @@ class MyBehatContext extends BehatContext implements KernelAwareInterface
     public function setKernel(KernelInterface $kernel)
     {
         $this->kernel = $kernel;
-    }
-
-    /**
-     * @Given /^the "([^"]*)" database is clean$/
-     */
-    public function theDatabaseIsClean($databaseName)
-    {
-        $container = $this->kernel->getContainer();
-        $databaseService = $container->get('test.database.service');
-        $databaseService->cleanDatabase($databaseName);
-    }
-
-    /**
-     * @Given /^the "([^"]*)" table in the "([^"]*)" database has rows:$/
-     */
-    public function theTableInTheDatabaseHasRows($tableName, $databaseName, TableNode $rows)
-    {
-        $rows = $rows->getHash();
-        $container = $this->kernel->getContainer();
-        $databaseService = $container->get('test.database.service');
-        $databaseService->populateDatabaseTableWithRows($databaseName, $tableName, $rows);
     }
 }

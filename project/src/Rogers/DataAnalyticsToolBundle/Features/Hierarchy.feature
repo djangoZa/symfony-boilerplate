@@ -6,11 +6,13 @@ Feature: Hierarchy
     Background:
         Given the "ioffice" database is clean
         And the "users" table in the "ioffice" database has rows:
-            | userID    | username | passwordHash                                                 | status |
-            | 1         | test1    | $2a$08$g11xPFJdehbL/9qxTprdeuYpWZtNnUvvTk5YIaRavoI3TFEKQSSUe | 1      |
+            | userID    | accountID | username | passwordHash                                                 | status |
+            | 1         | 1         | test1    | $2a$08$g11xPFJdehbL/9qxTprdeuYpWZtNnUvvTk5YIaRavoI3TFEKQSSUe | 1      |
 
     Scenario: Can add a top level group
         Given I am logged in with username "test1" and password "Supersalon1!"
+        And I browse to "/hierarchy"
+        
 #    Scenario: Can add a child group to a top level group
 #    Scenario: Can add a child group to another child group
 #    Scenario: Can add a salon to a top level group

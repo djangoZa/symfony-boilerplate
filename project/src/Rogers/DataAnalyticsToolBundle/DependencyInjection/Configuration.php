@@ -1,5 +1,4 @@
 <?php
-
 namespace Rogers\DataAnalyticsToolBundle\DependencyInjection;
 
 use Symfony\Component\Config\Definition\Builder\TreeBuilder;

@@ -1,3 +1,7 @@
+.default {
+    background-color:#DDD;
+}
+
 .login {
     background-image: url(/images/background.jpg);
 }

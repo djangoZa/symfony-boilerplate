@@ -10,9 +10,8 @@ use Behat\Gherkin\Node\TableNode;
 /**
  * Feature context.
  */
-class MyMinkContext extends RawMinkContext
+class WebUtilityContext extends RawMinkContext
 {
-    private $kernel;
     private $parameters;
 
     /**
@@ -23,15 +22,6 @@ class MyMinkContext extends RawMinkContext
     public function __construct(array $parameters)
     {
         $this->parameters = $parameters;
-    }
-
-    /**
-     * @Given /^I am logged out$/
-     */
-    public function iAmLoggedOut()
-    {
-        $driver = $this->getSession()->getDriver();
-        $driver->visit('/authentication/logout');
     }
 
     /**
@@ -120,15 +110,6 @@ class MyMinkContext extends RawMinkContext
 
         //set the cookie again
         $session->setCookie($cookieKey, $authenticationDetails);
-    }
-
-    /**
-     * @When /^I log out$/
-     */
-    public function iLogOut()
-    {
-        $driver = $this->getSession()->getDriver();
-        $driver->visit('/authentication/logout');
     }
 
     /**

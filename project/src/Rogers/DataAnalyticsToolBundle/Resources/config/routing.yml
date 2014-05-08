@@ -1,7 +1,9 @@
+#Dashboard
 rogers_data_analytics_tool_dashboard_index:
     path: /
     defaults: {_controller: RogersDataAnalyticsToolBundle:Dashboard:index}
 
+#Authentication
 rogers_data_analytics_tool_authentication_index:
     path: /authentication
     defaults: {_controller: RogersDataAnalyticsToolBundle:Authentication:index}
@@ -14,3 +16,8 @@ rogers_data_analytics_tool_authentication_login:
 rogers_data_analytics_tool_authentication_logout:
     path: /authentication/logout
     defaults: {_controller: RogersDataAnalyticsToolBundle:Authentication:logout}
+
+#Hierarchy
+rogers_data_analytics_tool_hierarchy_index:
+    path: /hierarchy
+    defaults: {_controller: RogersDataAnalyticsToolBundle:Hierarchy:index}
