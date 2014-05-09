@@ -1,1 +1,5 @@
 .vagrant
+/project/app/cache/*
+/project/app/logs/*
+!/project/app/cache/.gitkeep
+!/project/app/logs/.gitkeep
