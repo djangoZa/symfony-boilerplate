@@ -11,6 +11,7 @@ framework:
         engines: ['php']
     session:
         handler_id: ~
+    test: ~
 
 services:
     kernel.listener.data_analytics_tool_authentication_listener:
