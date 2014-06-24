@@ -1,6 +1,7 @@
 <VirtualHost *:80>
     ServerName data-analytics-tool
     ServerAlias dev.data-analytics-tool
+    ServerAlias master.data-analytics-tool
     ServerAlias localhost
     DocumentRoot /var/www/symfony-boilerplate
     <Directory /var/www/symfony-boilerplate>
